@@ -100,6 +100,11 @@ RUN set -x \
 	&& cd kbn_c3js_vis \
 	&& npm install
 
+# clean
+RUN set -x \
+        && apt-get -y autoremove \
+        && apt-get clean
+
 ENV PATH /usr/share/kibana/bin:$PATH
 
 COPY docker-entrypoint.sh /
