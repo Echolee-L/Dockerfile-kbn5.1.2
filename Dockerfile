@@ -49,7 +49,7 @@ RUN set -ex; \
 RUN set -x \
         && apt-get update \
         && apt-get install git -y \
-        && git config --global user.name "EchoLee" \
+        && git config --global user.name "Echolee" \
         && git config --global user.email 759768159@qq.com
 
 # https://www.elastic.co/guide/en/kibana/5.0/deb.html
@@ -71,10 +71,6 @@ RUN set -x \
         && grep -q "^elasticsearch\.url: 'http://elasticsearch:9200'\$" /etc/kibana/kibana.yml
 
 RUN set -x \
-	&& apt-get update \
-	&& apt-get install unzip
-
-RUN set -x \
 	&& cd /usr \
 	&& git clone https://github.com/Echolee-L/kibana.git -b 5.1.2-dev
 
@@ -91,9 +87,10 @@ RUN set -x \
 
 # install plugins
 RUN set -x \
+	&& cd /usr/share/kibana \
+	&& bin/kibana-plugin install https://github.com/DeanF/health_metric_vis/releases/download/v0.3.5/health_metric_vis-5.1.2.zip \
+	&& chown -R kibana:kibana /usr/share/kibana/optimize/ \
 	&& cd /usr/share/kibana/plugins \
-	&& wget https://github.com/clamarque/kibana_health_metric_vis/releases/download/v5.1/kibana_health_metric_vis-5.1.2.zip \
-	&& unzip kibana_health_metric_vis-5.1.2.zip \
 	&& git clone https://github.com/Echolee-L/kibana-relational-filter.git \
 	&& git clone https://github.com/Echolee-L/kanban_vis.git \
 	&& git clone https://github.com/Echolee-L/kbn_c3js_vis.git \
