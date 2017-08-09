@@ -89,6 +89,7 @@ RUN set -x \
 RUN set -x \
 	&& cd /usr/share/kibana \
 	&& bin/kibana-plugin install https://github.com/DeanF/health_metric_vis/releases/download/v0.3.5/health_metric_vis-5.1.2.zip \
+	&& bin/kibana-plugin install https://github.com/Echolee-L/kibana_shard_allocation/archive/v5.1.2.zip \
 	&& chown -R kibana:kibana /usr/share/kibana/optimize/ \
 	&& cd /usr/share/kibana/plugins \
 	&& git clone https://github.com/Echolee-L/kibana-relational-filter.git \
